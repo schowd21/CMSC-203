@@ -1,0 +1,70 @@
+  /*
+ * Class: CMSC203 
+ * Instructor: Ahmed Tarek
+ * Description: A program that uses the variables, scanner class, if and else statements to identify the WiFi connectivity issue. 
+ * Due: 2/09/2021
+ * Platform/compiler: Eclipse
+ * I pledge that I have completed the programming assignment independently.
+   I have not copied the code from a student or any source.
+   I have not given my code to any student.
+   Print your Name here: Sabrina Chowdhury
+*/
+
+import java.util.Scanner;
+public class Diagnostic 
+{
+	public static void main(String[] args)
+	{
+		Scanner keyB = new Scanner(System.in);
+		System.out.println("If you have a problem with internet connectivitity, this WiFi Diagnosis might work.");
+		System.out.println();
+		System.out.println("First step: reboot your computer.");
+		System.out.println("Are you able to connect with the internet (yes or no)");
+		String rebootComputer = keyB.nextLine();
+		if (rebootComputer.equals("yes"))
+		{
+			System.out.println("Rebooting your computer seemed to work.");
+		}// if statement checking if first step works
+		else if(rebootComputer.equals("no")) // if first step doesn't work
+		{
+			System.out.println("Second step: reboot your router.");
+			System.out.println("Are you able to connect with the internet (yes or no)");
+			String rebootRouter = keyB.nextLine();
+			if (rebootRouter.equals("yes"))
+			{
+				System.out.println("Rebooting your router seemed to work.");
+			} // if statement checking if second step works
+			else if(rebootRouter.equals("no")) // if second step doesn't work
+			{
+				System.out.println("Third step: make sure the cables to your router are plugged in firmly and your router is getting power.");
+				System.out.println("Are you able to connect with the internet (yes or no)");
+				String cableConnections = keyB.nextLine();
+				if (cableConnections.equals("yes"))
+				{
+					System.out.println("Checking the router's cables seemed to work.");
+				}// if statement checking if third step works
+				else if (cableConnections.equals("no"))// if third step doesn't work
+				{
+					System.out.println("Fourth step: move your computer closer to your router.");
+					System.out.println("Are you able to connect with the internet (yes or no)");
+					String routerDistance = keyB.nextLine();
+					if (routerDistance.equals("yes"))
+					{
+						System.out.println("Moving your computer closer to your router seemed to work");
+					}// if statement fourth step works
+					else if(routerDistance.equals("no"))
+					{
+						System.out.println("Fifth step: contact your ISP.");
+						System.out.println("Make sure your ISP is hooked up to your router");
+					}
+					
+				}
+				
+			}
+		}
+		keyB.close();
+	}
+	
+
+}
+// This is my code
