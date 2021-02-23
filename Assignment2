@@ -1,0 +1,121 @@
+/*
+ * Sabrina Chowdhury
+ *  Class: CMSC203 CRN XXXX
+ Program: Assignment 2
+ Instructor: Tarek
+ Summary of Description: the use of classes, loops and previous material to impement a number guessing game
+ Due Date:<02/22/2021
+ Integrity Pledge: I pledge that I have completed the programming assignment independently.
+ I have not copied the code from a student or any source.
+ */
+import java.util.Scanner;
+public class RandomNumberGuesser
+{
+	public static void main(String[] args) 
+	{
+		int lowGuess = 0;
+		int highGuess = 100;
+		Scanner keyB = new Scanner (System.in);
+		RNG randomNumber1 = new RNG();
+		int randomNumber = randomNumber1.rand();
+		System.out.println("Enter your first guess: ");
+		int nextGuess = keyB.nextInt();
+	
+		if (nextGuess == randomNumber)
+		{
+			System.out.println("Number of guesses is: " + randomNumber1.getCount());
+			System.out.println("Congratulations you guessed correctly");
+		}
+		else if (nextGuess < randomNumber)
+		{
+			System.out.println("Number of guesses is: " + randomNumber1.getCount());
+			System.out.println("Your guess is too low");
+			lowGuess = nextGuess;
+		}
+		else
+		{
+			System.out.println("Number of guesses is: " + randomNumber1.getCount());
+			System.out.println("Your guess is too high");
+			highGuess = nextGuess;
+		}
+		do
+		{
+			System.out.println("Enter your guess between: " + lowGuess + " and " + highGuess);
+			nextGuess = keyB.nextInt();
+			if(nextGuess>=highGuess || nextGuess<=lowGuess)
+			{
+				System.out.println("enter your guess again");
+				nextGuess = keyB.nextInt();
+			}
+			randomNumber1.inputValidation(nextGuess,lowGuess, highGuess);
+			
+			if (nextGuess == randomNumber)
+			{
+				System.out.println("Number of guesses is:" + randomNumber1.getCount());
+				System.out.println("Congratulations you guessed correctly");
+			}
+			else if (nextGuess < randomNumber)
+			{
+				System.out.println("Number of guesses is:" + randomNumber1.getCount());
+				System.out.println("Your guess is too low");
+				lowGuess = nextGuess;
+			}
+			else
+			{
+				System.out.println("Number of guesses is:" + randomNumber1.getCount());
+				System.out.println("Your guess is too high");
+				highGuess = nextGuess;
+			}			
+		}while (nextGuess != randomNumber);
+		System.out.println("Try again? (yes or no)");
+		String response = keyB.nextLine();
+	
+		if(response.equals("yes"))
+		{
+			do 
+			{
+				System.out.println("Enter your first guess: ");
+				nextGuess = keyB.nextInt();
+				do
+				{
+					System.out.println("Enter your guess between: " + lowGuess + " and " + highGuess);
+					nextGuess = keyB.nextInt();
+					randomNumber1.inputValidation(nextGuess,lowGuess, highGuess);
+					if(nextGuess>=highGuess || nextGuess<=lowGuess)
+					{
+						System.out.println("enter your guess again: ");
+						nextGuess = keyB.nextInt();
+					}
+					randomNumber1.inputValidation(nextGuess,lowGuess, highGuess);
+					if (nextGuess == randomNumber)
+					{
+						System.out.println("Number of guesses is:" + randomNumber1.getCount());
+						System.out.println("Congratulations you guessed correctly");
+					}
+					else if (nextGuess < randomNumber) 
+					{
+						System.out.println("Number of guesses is:" + randomNumber1.getCount());
+						System.out.println("Your guess is too low");
+						lowGuess = nextGuess;
+					} 
+					else 
+					{
+						
+						System.out.println("Number of guesses is:" + randomNumber1.getCount());
+						System.out.println("Your guess is too high");
+						highGuess = nextGuess;
+					}			
+				}while (nextGuess != randomNumber);
+				System.out.println("Try again? (yes or no)");
+				response = keyB.nextLine();
+				keyB.nextLine();
+			}while (response.equals("yes"));
+		}
+		if (response.compareTo("no") == 0)
+		{
+			System.out.println("Goodbye.");
+		}
+		System.out.println("Programmer: Sabrina Chowdhury");
+	}
+
+}
