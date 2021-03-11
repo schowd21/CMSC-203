@@ -1,0 +1,173 @@
+package application;
+
+import java.io.IOException;
+import javafx.application.Application;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class FXDriver extends Application 
+{
+	/**
+	 * The main method for the GUI example program JavaFX version
+	 * @param args not used
+	 * @throws IOException
+	 */
+	public static void main(String[] args) 
+	{
+		launch(args);   
+	}
+		   
+	@Override
+	public void start(Stage stage) throws IOException 
+	{
+		//student Task #1:
+		//  instantiate the FXMainPane, name it root
+		FXMainPane root = new FXMainPane();
+		//  set the scene to hold root
+		stage.setScene(new Scene(root,400,400));
+		
+		//	set stage title
+		stage.setTitle("Hello World GUI");
+		//display the stage
+		stage.show();
+
+	}
+
+}
+
+package application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+
+/**
+ * This panel is the basic panel, inside which other panels are placed.  
+ * Before beginning to implement, design the structure of your GUI in order to 
+ * understand what panels go inside which ones, and what buttons or other components
+ * go in which panels.  
+ *
+ */
+//make the main panel's layout be a VBox
+public class FXMainPane extends VBox 
+{
+
+	//student Task #2:
+	//  declare five buttons, a label, and a textfield
+	//  declare two HBoxes
+	Button b1;
+	Button b2;
+	Button b3;
+	Button b4;
+	Button b5;
+	Label feedbackLabel;
+	TextField tField;
+	HBox hbox1;
+	HBox hbox2;
+
+	//student Task #4:
+	//  declare an instance of DataManager
+	DataManager one;
+	/**
+	 * The MainPanel constructor sets up the entire GUI in this approach.  Remember to
+	 * wait to add a component to its containing component until the container has
+	 * been created.  This is the only constraint on the order in which the following 
+	 * statements appear.
+	 */
+	FXMainPane() 
+	{
+		//student Task #2:
+		//  instantiate the buttons, label, and textfield
+		b1 = new Button("Hello");
+		b2 = new Button("Howdy");
+		b3 = new Button("Chinese");
+		b4 = new Button("Clear");
+		b5 = new Button("Exit");
+		feedbackLabel = new Label("Feedback");
+		tField = new TextField();
+		
+		//  instantiate the HBoxes
+		hbox1 = new HBox();
+		hbox2 = new HBox();
+		//student Task #4:
+		//  instantiate the DataManager instance
+		one = new DataManager();
+		//  set margins and set alignment of the components
+		hbox1.setAlignment(Pos.CENTER);
+		hbox1.setMargin(feedbackLabel,getInsets());
+		hbox1.setMargin(tField, getInsets());
+		hbox2.setAlignment(Pos.CENTER);
+		setAlignment(Pos.CENTER);
+		b1.setAlignment(Pos.CENTER);
+		hbox2.setMargin(b1, getInsets());
+		b2.setAlignment(Pos.CENTER);
+		hbox2.setMargin(b2,getInsets()); 
+		b3.setAlignment(Pos.CENTER);
+		hbox2.setMargin(b3, getInsets()); 
+		b4.setAlignment(Pos.CENTER);
+		hbox2.setMargin(b4, getInsets()); 
+		b5.setAlignment(Pos.CENTER);
+		hbox2.setMargin(b5, getInsets()); 
+		
+		//student Task #3:
+		//  add the label and textfield to one of the HBoxes
+		hbox1.getChildren().addAll(feedbackLabel,tField);
+		//  add the buttons to the other HBox
+		hbox2.getChildren().addAll(b1, b2, b3, b4, b5);
+		//  add the HBoxes to this FXMainPanel (a VBox)
+		getChildren().addAll(hbox1,hbox2);
+		
+		b1.setOnAction(new ButtonHandler());
+		b2.setOnAction(new ButtonHandler());
+		b3.setOnAction(new ButtonHandler());
+		b4.setOnAction(new ButtonHandler());
+		b5.setOnAction(new ButtonHandler());
+	}
+	
+	//Task #4:
+	//  create a private inner class to handle the button clicks
+	class ButtonHandler implements EventHandler <ActionEvent>
+	{
+		public void handle(ActionEvent event)
+		{
+			Object source = event.getTarget();
+			if(source == b1 )
+			{
+				one.getHello();
+				tField.setText(one.getHello());
+			}
+			else if (source == b2)
+			{
+				one.getChinese();
+				tField.setText(one.getChinese());
+			}
+			else if(source==b3)
+			{
+				one.getHowdy();
+				tField.setText(one.getHowdy());
+			}
+			else if (source == b4)
+			{
+				tField.setText("");
+			}
+			else
+			{
+				Platform.exit();
+				System.exit(0);
+			}
+		}
+	}
+}
